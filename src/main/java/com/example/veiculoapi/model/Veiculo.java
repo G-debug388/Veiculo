@@ -2,10 +2,13 @@ package com.example.veiculoapi.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "veiculos")
+@Getter
+@Setter
 public class Veiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +27,6 @@ public class Veiculo {
     private String ano;
 
     @NotBlank(message = "CPF não pode ser vazio")
-    @Pattern(regexp = "\\d{11}", message = "CPF deve conter 11 dígitos numéricos")
     private String cpf;
 
     public Veiculo() {}
@@ -36,6 +38,4 @@ public class Veiculo {
         this.ano = ano;
         this.cpf = cpf;
     }
-
-    // Getters e Setters
 }

@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/veiculos")
@@ -24,13 +23,15 @@ public class VeiculoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Veiculo> getById(@PathVariable Long id) {
-        return service.findById(id).map(ResponseEntity::ok)
+        return service.findById(id)
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/cpf/{cpf}")
-    public ResponseEntity<Veiculo> getByCpf(@PathVariable String cpf) {
-        return service.findByCpf(cpf).map(ResponseEntity::ok)
+    @GetMapping("/placa/{placa}")
+    public ResponseEntity<Veiculo> getByPlaca(@PathVariable String placa) {
+        return service.findByPlaca(placa)
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -41,11 +42,10 @@ public class VeiculoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Veiculo> update(@PathVariable Long id, @RequestBody Veiculo veiculo) {
-        if (!service.findById(id).isPresent()) {
+        if (service.findById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        veiculo.setId(id);
-        return ResponseEntity.ok(service.save(veiculo));
+        return ResponseEntity.ok(service.save(veiculo)); // Removido setId(id) pois o ID deve ser gerenciado pelo banco
     }
 
     @DeleteMapping("/{id}")

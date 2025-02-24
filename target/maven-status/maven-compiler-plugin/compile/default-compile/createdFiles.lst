@@ -1,0 +1,5 @@
+com\example\veiculoapi\controller\VeiculoController.class
+com\example\veiculoapi\model\Veiculo.class
+com\example\veiculoapi\service\VeiculoService.class
+com\example\veiculoapi\repository\VeiculoRepository.class
+com\example\veiculoapi\VeiculoApiApplication.class

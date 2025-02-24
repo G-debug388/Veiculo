@@ -24,14 +24,14 @@ public class VeiculoService {
         return repository.findById(id);
     }
 
-    public Optional<Veiculo> findByCpf(String cpf) {
-        return repository.findByCpf(cpf);
+    public Optional<Veiculo> findByPlaca(String placa) {
+        return repository.findByPlaca(placa);
     }
 
     public Veiculo save(Veiculo veiculo) {
-        // Verifica se o CPF já existe antes de salvar
-        if (repository.findByCpf(veiculo.getCpf()).isPresent()) {
-            throw new DataIntegrityViolationException("CPF já cadastrado!");
+        // Verifica se a placa já existe antes de salvar
+        if (repository.findByPlaca(veiculo.getPlaca()).isPresent()) {
+            throw new DataIntegrityViolationException("Placa já cadastrada!");
         }
         return repository.save(veiculo);
     }
